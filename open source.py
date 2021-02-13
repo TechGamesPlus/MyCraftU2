@@ -4,7 +4,7 @@ import random
 import asyncio
 from discord.ext import commands, tasks\
 
-client = commands.Bot(command_prefix='PREFIX
+client = commands.Bot(command_prefix='PREFIX')
 client.remove_command('help')
 
 @client.event
