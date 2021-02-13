@@ -62,8 +62,12 @@ async def AmIKarlson(ctx):
     print(f'Command "AmIKarlson" has been Triggered by {author}')
     await ctx.send('Your Answer:')
     await asyncio.sleep(2)
-    await ctx.send(ra)
-    print(f'{author} got answer "{ra}"')
+    if author.id == 528290553415335947:
+        await ctx.send('Yes, you are KARLSON')
+        print(f'{author} got answer "Yes, you are KARLSON"')
+    else:
+        await ctx.send(ra)
+        print(f'{author} got answer "{ra}"')
 
 @client.command()
 async def AmIBeans(ctx):
