@@ -2,27 +2,23 @@ import discord
 import discord as api
 import random
 import asyncio
-from discord.ext import commands, tasks\
+from discord.ext import commands, tasks
 
-client = commands.Bot(command_prefix='PREFIX')
+client = commands.Bot(command_prefix=',')
 client.remove_command('help')
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.STATUS, activity=discord.Game('TEXT'))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('something'))
     print('Bot is Online')
 
 @client.event
 async def on_command_error(ctx, error):
     author = ctx.author
-    if isinstance(error, commands.CommandNotFound):
-        print(f'Command has been triggered by {author}, but it was not found :|')
-        await ctx.send('ERROR MESSAGE')
 
 @client.command()
 async def help(ctx):
     author = ctx.author
-    embed = discord.Embed(color = discord.Color.red())
 
     print(f'Command "help" has been Triggered by {author}')
     await ctx.send('HELP COMMAND')
@@ -92,7 +88,7 @@ async def crysis(ctx):
     await ctx.send(f'{author.name}: Well I don\'t need your help, anyway!\nBOT NAME: :regional_indicator_n: :regional_indicator_o:')
     await asyncio.sleep(2)
     await ctx.send('**A few weeks later...**')
-    await ctx.send(f'BOT NAME: Hey, can you please sponsor me?\n{ra}: :regional_indicator_n:  :regional_indicator_o:')
+    await ctx.send(f'MyCraftU2: Hey, can you please sponsor me?\n{ra}: :regional_indicator_n:  :regional_indicator_o:')
 
 @client.command()
 async def lottery(ctx):
@@ -135,7 +131,6 @@ async def lottery(ctx):
     if ctx.author.id != YOUR USER ID:
         print(f'{author} attempted to use command "lottery"')
         await ctx.send('This Command Is Under Maintenance')
-        await ctx.send('ERROR MESSAGE')
         return
 
 @client.command()
@@ -184,7 +179,7 @@ async def clear(ctx, amount=10):
 async def oauth2(ctx):
     author = ctx.author
     print(f'Command "oauth2" has been Triggered by {author}')
-    await ctx.send('Here is the OAuth2 Link for BOT NAME')
+    await ctx.send('Here is the OAuth2 Link for MyCraftU2')
     await ctx.send('https://discord.com/api/oauth2/authorize?client_id=756726765719912501&permissions=8&scope=bot')
 
 @client.command()
@@ -192,8 +187,8 @@ async def bigrigs(ctx):
     author = ctx.author
     print(f'Command "bigrigs" has been Triggered by {author}')
     await ctx.send('Here\'s a Link to a Free Version of BigRigs: <https://bit.ly/3psDhNs>')
-    await ctx.send(';)')
-    await ctx.channel.purge(limit=1)
+    heh = await ctx.send(';)')
+    await heh.delete()
 
 @client.command()
 async def command(ctx):
@@ -219,13 +214,12 @@ async def dm(ctx, member : api.Member, *, text="placeholder"):
 async def dmd(ctx, member : api.Member, *, text="placeholder"):
     author = ctx.author
     print(f'Comamnd "dmd" has been Triggered by {author}')
+    await ctx.messge.delete()
     if member.dm_channel == None:
         channel = await member.create_dm()
-        await ctx.channel.purge(limit=1)
         await channel.send(text)
         await ctx.send('`' + text + '`' + f' was sent to {member.display_name}')
     elif member.dm_channel != None:
-        await ctx.channel.purge(limit=1)
         await member.dm_channel.send(text)
         await ctx.send('`' + text + '`' + f' was sent to {member.display_name}')
         
@@ -355,12 +349,5 @@ async def unban(ctx, *, member):
             await ctx.guild.unban(user)
             await ctx.send(f'Unbanned {user.mention}')
             return
-
-
-@clear.error
-async def clear_error(ctx, error):
-    if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('ERROR MESSAGE')
-
 
 client.run('TOKEN')
