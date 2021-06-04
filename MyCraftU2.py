@@ -338,4 +338,4 @@ async def clear_error(ctx, error):
         await ctx.send('Sorry, I had an error. I can give you the details...\nMyCraftU2 Error: Missing Required Arguments')
 
 
-client.run('NzU2NzI2NzY1NzE5OTEyNTAx.X2WCuA.0FaPgo84o1G0K_fzXlr8vKXJV8Y')
+client.run('TOKEN')
